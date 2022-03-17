@@ -12,12 +12,18 @@
       </div>
     </div>
     <div class="control">
-      <div class="control_body">背景</div>
+      <div class="control_body">
+        <nav-bar />
+      </div>
     </div>
   </nav>
 </template>
 <script>
+import NavBar from './components/NavBar'
 export default {
+  components: {
+    NavBar
+  },
   data() {
     return {
       navItem: [
@@ -61,7 +67,6 @@ nav {
     padding: 10px;
     box-sizing: border-box;
     .control_body{
-      font-size: 13px;
       background-color: #f4f4f4;
       width: 100%;
       padding: 5px;

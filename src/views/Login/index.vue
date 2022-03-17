@@ -1,7 +1,6 @@
 <template>
   <div>
-    <button v-throttle>测试节流点击</button>
-    <svg-icon svg-name="home"></svg-icon>
+    登陆
   </div>
 </template>
 <script>

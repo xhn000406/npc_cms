@@ -6,7 +6,11 @@
       <section>
         <layout-nav />
         <article>
-          <router-view />
+          <!-- 路由缓存机制 -->
+          <keep-alive v-if="$route.meta.keepAlive">
+            <router-view />
+          </keep-alive>
+          <router-view v-else />
         </article>
       </section>
     </main>
@@ -29,8 +33,16 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+@keyframes showMain{
+  form {
+    opacity: 0;
+  } to {
+    opacity: 1;
+  }
+}
 .layout{
   min-height: 100vh;
+  min-width: 1000px;
   display: flex;
   flex-flow: column;
   background-color: #f4f4f4;
@@ -45,8 +57,8 @@ export default {
     display: flex;
     aside{
       z-index: 1;
-      width: 250px;
-      background-color: #004477;
+      // width: 250px;
+      background-color: var(--globalAsideBackground);
       box-shadow: 0 0 4px 1px #e0e0e0;
     }
     section{
