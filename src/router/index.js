@@ -11,7 +11,6 @@ export const routes = [
     name: 'Layout',
     redirect: { name: 'Home' },
     component: () => import('@/layout'),
-    meta: { hidden: true },
     children: [
       {
         path: 'home',
@@ -20,19 +19,13 @@ export const routes = [
         meta: { title: '首页', icon: 'menu_home', keepAlive: true }
       },
       {
-        path: 'user',
-        name: 'User',
-        redirect: { name: 'UserAdmin' },
-        component: () => import('@/views/user'),
+        path: 'setting',
+        name: 'Setting',
+        component: () => import('@/views/Setting'),
         children: [
-          {
-            path: 'admin',
-            name: 'UserAdmin',
-            component: () => import('@/views/user/components/userAdmin'),
-            meta: { title: '用户管理', icon: 'menu_user', keepAlive: true }
-          }
+
         ],
-        meta: { title: '用户管理', icon: 'menu_user' }
+        meta: { title: '系统设置', icon: 'menu_set', keepAlive: true }
       }
     ]
   },
@@ -40,7 +33,8 @@ export const routes = [
     path: '/login',
     name: 'Login',
     component: () => import('@/views/Login')
-  }
+  },
+  { path: '*', name: '404', component: () => import('@/views/404') }
 ]
 
 const router = new VueRouter({

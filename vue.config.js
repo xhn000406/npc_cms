@@ -1,6 +1,7 @@
 const {
   defineConfig
 } = require('@vue/cli-service')
+const BASEURL = process.env.BASEURL
 const path = require('path')
 module.exports = defineConfig({
   transpileDependencies: true,
@@ -18,5 +19,15 @@ module.exports = defineConfig({
     .options({
       symbolId: "icon-[name]"
     })
+  },
+  devServer: {
+    open: true,
+    host: 'localhost',
+    proxy: {
+      '/api': {
+        target: BASEURL,
+        changeOrigin: true
+      }
+    }
   }
 })
