@@ -14,7 +14,7 @@
 <script>
 import Logo from '@/assets/logo.png'
 import NavItem from './components/RouterItem'
-import { routes } from '@/router'
+import { asyncRoute } from '@/router'
 export default {
   components: {
     NavItem
@@ -22,12 +22,12 @@ export default {
   data () {
     return {
       Logo,
-      routers: routes[0].children
+      routers: asyncRoute[0].children
     }
   },
 
   mounted() {
-    console.log(routes[0])
+    console.log(asyncRoute[0])
   }
 }
 </script>

@@ -1,11 +1,11 @@
 <template>
   <div>
-    <router-view></router-view>
+    菜单管理
   </div>
 </template>
 <script>
 export default {
-  data () {
+  data() {
     return {}
   }
 }

@@ -29,6 +29,10 @@ export default {
 
   data () {
     return {}
+  },
+
+  async mounted() {
+    console.log(this.$router)
   }
 }
 </script>

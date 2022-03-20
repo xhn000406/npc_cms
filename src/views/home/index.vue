@@ -8,16 +8,9 @@
   </div>
 </template>
 <script>
-import {
-  apiGetUserInfo
-} from '@/api/user'
 export default {
   data () {
     return {}
-  },
-
-  async mounted() {
-    console.log(await apiGetUserInfo())
   }
 }
 </script>

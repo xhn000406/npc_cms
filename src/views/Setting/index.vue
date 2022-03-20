@@ -1,6 +1,7 @@
 <template>
   <div>
     设置
+    <router-view></router-view>
   </div>
 </template>
 <script>

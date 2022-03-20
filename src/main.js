@@ -2,7 +2,6 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import power from './power'
 import vueGlobalComponent from '@/module/vueGlobalComponent'
 import vueDirective from '@/module/vueDirective'
 
@@ -22,7 +21,7 @@ Vue.prototype.$msgBox = ElementUI.Message
 Vue.use(ElementUI)
 
 // 这儿的导航守卫只对应权限操作
-router.beforeEach((to, from, next) => power(to, from, next))
+// router.beforeEach((to, from, next) => power(to, from, next))
 
 Vue.config.productionTip = false
 

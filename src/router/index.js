@@ -2,33 +2,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
-
+import power from '@/beforeEach'
 Vue.use(VueRouter)
 
-export const routes = [
-  {
-    path: '/',
-    name: 'Layout',
-    redirect: { name: 'Home' },
-    component: () => import('@/layout'),
-    children: [
-      {
-        path: 'home',
-        name: 'Home',
-        component: () => import('@/views/home'),
-        meta: { title: '首页', icon: 'menu_home', keepAlive: true }
-      },
-      {
-        path: 'setting',
-        name: 'Setting',
-        component: () => import('@/views/Setting'),
-        children: [
-
-        ],
-        meta: { title: '系统设置', icon: 'menu_set', keepAlive: true }
-      }
-    ]
-  },
+export const generalRoutes = [
   {
     path: '/login',
     name: 'Login',
@@ -40,15 +17,13 @@ export const routes = [
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes: generalRoutes
 })
-
-// router.addRoutes()
 
 // 导航守卫
 router.beforeEach((to, from, next) => {
   NProgress.start()
-  next()
+  power(to, from, next)
 })
 router.afterEach(() => {
   NProgress.done()
@@ -57,7 +32,9 @@ router.afterEach(() => {
 // hook这个router的push函数
 const mRouterPush = VueRouter.prototype.push
 VueRouter.prototype.push = function(location) {
-  return mRouterPush.call(this, location).catch(err => err)
+  return mRouterPush
+  .call(this, location)
+  .catch(err => err)
 }
 
 export default router
