@@ -1,12 +1,12 @@
 import axios from 'axios'
-import Vue from 'vue'
+import ElementUI from 'element-ui'
 import config from '@/config'
 import {
   TEXT_TOKEN,
   getToken
 } from './session'
 // 拿到全局的消息框函数对象
-const msgBox = Vue.prototype.$msgBox
+const msgBox = ElementUI.Message
 const request = axios.create({
   baseURL: '/api',
   timeout: 1000 * 10
