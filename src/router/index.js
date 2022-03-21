@@ -5,6 +5,7 @@ import 'nprogress/nprogress.css'
 import power from '@/beforeEach'
 Vue.use(VueRouter)
 
+// 固定路由
 export const generalRoutes = [
   {
     path: '/login',

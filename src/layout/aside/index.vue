@@ -7,14 +7,14 @@
       class="menu"
       :default-active="$route.name"
     >
-      <nav-item :routers="routers" />
+      <nav-item :routers="menuBarItem" />
     </el-menu>
   </aside>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 import Logo from '@/assets/logo.png'
 import NavItem from './components/RouterItem'
-import { asyncRoute } from '@/router'
 export default {
   components: {
     NavItem
@@ -22,12 +22,18 @@ export default {
   data () {
     return {
       Logo,
-      routers: asyncRoute[0].children
+      routers: []
     }
   },
 
+  computed: {
+    ...mapGetters({
+      'menuBarItem': 'getMenuBarItem'
+    })
+  },
+
   mounted() {
-    console.log(asyncRoute[0])
+    
   }
 }
 </script>

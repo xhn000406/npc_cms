@@ -1,6 +1,7 @@
 <template>
   <div>
-    你看个几把
+    <span>你看个几把</span>
+    <router-link :to="{ name: 'Home' }">到首页</router-link>
   </div>
 </template>
 <script>

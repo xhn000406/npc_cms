@@ -4,15 +4,19 @@ import Layout from '@/layout'
 export const disposeRemoteRouters = (routers) => {
   let mRouters = []
   routers.forEach(router => {
-    if (router.children) {
-      router.children = disposeRemoteRouters(router.children)
-    }
-    if (router.name === 'Layout') {
-      router.component = Layout
-    } else if (router.component) {
-      router.component = _import(router.component)
-    }
-    mRouters.push(router)
+    if (router.children) router.children = disposeRemoteRouters(router.children)
+    if (router.name === 'Layout') router.component = Layout
+    mRouters.push({
+      path: router.path,
+      name: router.url,
+      component: _import(router.component),
+      children: router.children,
+      meta: {
+        title: router.menuName,
+        icon: router.icon,
+        keepAlive: true
+      }
+    })
   })
   return mRouters
 }
