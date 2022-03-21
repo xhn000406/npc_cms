@@ -5,10 +5,10 @@ export default (Vue) => {
   Vue.directive('throttle', dom => {
     console.log(dom)
     dom.addEventListener('click', () => {
-      dom.style.pointerEvents = 'none'
+      dom.classList.add('button_throttle')
       setTimeout(() => {
-        dom.style.pointerEvents = ''
-      }, 1000)
+        dom.classList.remove('button_throttle')
+      }, 2000)
     })
   })
 

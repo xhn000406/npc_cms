@@ -1,10 +1,16 @@
 <template>
   <div>
-    <button v-power="'system:role:insert'">增</button>
-    <button v-power="'system:role:delete'">删</button>
-    <button v-power="'system:user:update'">改</button>
-    <button v-power="'system:role:query'">查</button>
-    <svg-icon svg-name="home"></svg-icon>
+    <div>
+      <div>这里测试按钮权限</div>
+      <blue-button v-power="'system:rule:insert'">增加</blue-button>
+      <blue-button v-power="'system:rule:delete'">删除</blue-button>
+      <blue-button v-throttle v-power="'system:rule:update'">更新(顺便测试节流)</blue-button>
+      <blue-button v-power="'system:rule:query'">查找</blue-button>
+    </div>
+    <div>
+      <div>测试封装的图标组件</div>
+      <svg-icon svg-name="home"></svg-icon>
+    </div>
   </div>
 </template>
 <script>
