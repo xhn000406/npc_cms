@@ -1,0 +1,22 @@
+<view class="container">
+  <view class="cell cell_header">
+    <image src=""></image>
+    <view>
+      <text>小蓝</text>
+      <text>（学生仔）</text>
+    </view>
+  </view>
+  <van-cell-group>
+    <van-cell
+      wx:for="{{ cellItem }}"
+      wx:key="index"
+      clickable
+      is-link
+      center
+      url="{{ item.path }}"
+      icon="{{ item.icon }}"
+      title="{{ item.title }}"
+    />
+  </van-cell-group>
+</view>
+

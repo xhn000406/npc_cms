@@ -1,0 +1,16 @@
+<view class="tab">
+  <view
+    wx:for="{{ tabItme }}"
+    wx:key="index"
+    data-index="{{ item.name }}"
+    data-url="{{ item.path }}"
+    class="tab_item {{ item.name === tabIndex ? 'active' : '' }}"
+    bindtap="tabSwitch"
+  >
+    <image
+      src="../icons/svg/{{ item.icon }}{{ item.name === tabIndex ? '_active' : '' }}.svg"
+    />
+    <view>{{ item.title }}</view>
+  </view>
+</view>
+

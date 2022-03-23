@@ -5,7 +5,6 @@ import {
   TEXT_TOKEN,
   getToken
 } from './session'
-// 拿到全局的消息框函数对象
 const msgBox = ElementUI.Message
 const request = axios.create({
   baseURL: '/api',

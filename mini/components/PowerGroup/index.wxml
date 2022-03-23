@@ -1,0 +1,17 @@
+<view class="power_group">
+  <view class="power_group_title">{{ title }}</view>
+  <view class="power_group_content">
+    <view
+      wx:for="{{ power }}"
+      wx:key="index"
+      class="power_group_item"
+      hover-class="hover"
+      data-url="{{ item.path }}"
+      bindtap="goPower"
+    >
+      <image src="{{ item.icon }}" />
+      <view>{{ item.title }}</view>
+    </view>
+  </view>
+</view>
+

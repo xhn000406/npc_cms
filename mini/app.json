@@ -1,0 +1,36 @@
+{
+  "tabBar": {
+    "custom": true,
+    "list": [
+      {
+        "pagePath": "pages/power/index"
+      },
+      {
+        "pagePath": "pages/me/index"
+      }
+    ]
+  },
+  "pages": [
+    "pages/power/index",
+    "pages/me/index",
+    "views/power/scoreAdmin/index",
+    "views/power/sportScoreAdmin/index",
+    "views/power/dataAnalyze/index",
+    "views/power/groupAdmin/index",
+    "views/power/addScoreApply/index",
+    "views/me/myInfo/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#005CA1",
+    "navigationBarTitleText": "Weixin",
+    "navigationBarTextStyle": "white"
+  },
+  "usingComponents": {
+    "power-group": "/components/PowerGroup/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

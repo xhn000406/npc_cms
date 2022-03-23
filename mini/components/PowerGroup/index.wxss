@@ -1,0 +1,33 @@
+.power_group {
+  background-color: #fff;
+  margin: 20rpx;
+  border-radius: 15rpx;
+}
+.power_group .power_group_title {
+  font-size: 32rpx;
+  padding: 20rpx;
+  border-bottom: 1px solid #f4f4f4;
+  color: #999;
+}
+.power_group .power_group_content {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 32rpx;
+}
+.power_group .power_group_content .power_group_item {
+  letter-spacing: 3rpx;
+  width: 33.33%;
+  box-sizing: border-box;
+  border-right: 1px solid #f4f4f4;
+  text-align: center;
+  border-bottom: 1px solid #f4f4f4;
+  padding: 40rpx 0;
+}
+.power_group .power_group_content .power_group_item image {
+  width: 80rpx;
+  height: 80rpx;
+  margin-bottom: 10rpx;
+}
+.power_group .power_group_content .power_group_item.hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}

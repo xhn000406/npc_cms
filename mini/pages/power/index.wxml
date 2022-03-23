@@ -1,0 +1,4 @@
+<view class="container">
+  <power-group title="成绩管理" power="{{ scoreItem }}" />
+  <power-group title="协会管理" power="{{ groupItem }}" />
+</view>
