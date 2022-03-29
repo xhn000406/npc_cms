@@ -1,4 +1,5 @@
 import router from '@/router'
+import ElementUI from 'element-ui'
 import {
   apiGetUserInfo
 } from '@/api/user'
@@ -30,6 +31,27 @@ export default (async (to, from, next) => {
               keepAlive: true
             }
           },
+          // {
+          //   path: 'system',
+          //   name: 'System',
+          //   component: () => import('@/views/system'),
+          //   children: [
+          //     {
+          //       path: 'role',
+          //       name: 'RoleAdmin',
+          //       component: () => import('@/views/system'),
+          //       meta: {
+          //         title: '人员管理',
+          //         icon: 'menu_home',
+          //         keepAlive: true
+          //       }
+          //     }
+          //   ],
+          //   meta: {
+          //     title: '系统管理',
+          //     icon: 'menu_home'
+          //   }
+          // },
           ...disposeRemoteRouters(sysMenu)
         ]
         // 在动态路由上加了固定的路由
@@ -48,8 +70,11 @@ export default (async (to, from, next) => {
         store.commit('setUserRule', permissions)
         mSyncRoutes.forEach(item => router.addRoute(item))
         next({ path: '/' })
-      } catch(e) {
-        console.log(e)
+      } catch {
+        ElementUI.Message({
+          message: '获取路由异常',
+          type: 'error'
+        })
         next({ name: 'Login' })
       }
     } else {

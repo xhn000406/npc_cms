@@ -14,14 +14,16 @@
         </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>个人信息</el-dropdown-item>
-          <el-dropdown-item>退出登陆</el-dropdown-item>
+          <el-dropdown-item>
+            <div @click="exitLogin">退出登陆</div>
+          </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
   </header>
 </template>
 <script>
-import { getToken } from '@/utils/session'
+import { getToken, delToken } from '@/utils/session'
 import Logo from '@/assets/logo.png'
 export default {
   computed: {
@@ -32,6 +34,13 @@ export default {
   data () {
     return {
       Logo
+    }
+  },
+
+  methods: {
+    exitLogin() {
+      delToken()
+      this.$router.push({ name: 'Login' })
     }
   }
 }

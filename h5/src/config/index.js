@@ -4,6 +4,7 @@ const mConfig = {
     success: 200,
     error: 500
   },
+  // 权限标识符
   POWER_LIST: {
     insert: 'system:rule:insert',
     delete: 'system:rule:delete',

@@ -3,12 +3,11 @@ import store from '@/store'
 export default (Vue) => {
   // 节流函数，防止重复点击
   Vue.directive('throttle', dom => {
-    console.log(dom)
     dom.addEventListener('click', () => {
       dom.classList.add('button_throttle')
       setTimeout(() => {
         dom.classList.remove('button_throttle')
-      }, 2000)
+      }, 1000)
     })
   })
 

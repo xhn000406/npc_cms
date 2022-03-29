@@ -9,10 +9,13 @@
   </div>
 </template>
 <script>
+import config from '@/config'
 export default {
   props: ['power', 'buttonClass'],
   data() {
-    return {}
+    return {
+      POWER_LIST: config.POWER_LIST
+    }
   }
 }
 </script>
