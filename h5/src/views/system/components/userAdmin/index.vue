@@ -117,11 +117,10 @@ export default {
     async editItem(item) {
       if (item.userId) {
         await apiEditUserInfo(item)
-        this.getUserList()
       } else {
         await apiAddUser(item)
       }
-      
+      this.getUserList()
     },
 
     async getUserList() {

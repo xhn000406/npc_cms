@@ -9,6 +9,9 @@ export const apiGetRoleInfo = (roleId) => request.get(`/system/role/${roleId}`)
 // 修改角色
 export const apiEditRoleInfo = (data) => request.put(`/system/role`, data)
 
+// 增加角色
+export const apiAddRole = (data) => request.post(`/system/role`, data)
+
 // 删除角色
 export const apiDeleteRole = (roleId) => request.delete(`/system/role/${roleId}`)
 
