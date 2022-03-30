@@ -7,7 +7,7 @@
         :index="item.name"
       >
         <template slot="title">
-          <svg-icon :svg-name="item.meta.icon" size="1.3em"></svg-icon>
+          <blue-icon :svg-name="item.meta.icon" size="1.3em"></blue-icon>
           <span style="margin-left: 10px">{{ item.meta.title }}</span>
         </template>
         <router-item
@@ -21,7 +21,7 @@
         :index="item.name"
         @click="routerGo(item.name)"
       >
-        <svg-icon :svg-name="item.meta.icon" size="1.3em"></svg-icon>
+        <blue-icon :svg-name="item.meta.icon" size="1.3em"></blue-icon>
         <span style="margin-left: 10px">{{ item.meta.title }}</span>
       </el-menu-item>
     </template>

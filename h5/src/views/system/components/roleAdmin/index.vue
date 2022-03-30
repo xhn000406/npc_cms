@@ -1,48 +1,79 @@
 <template>
   <div class="container">
     <div class="data_list">
-      <el-table :data="roleList">
-        <el-table-column align="center" type="selection" />
-        <el-table-column prop="roleId" label="编号" />
-        <el-table-column prop="roleName" label="角色名" />
-        <el-table-column prop="roleKey" label="角色标识" />
-        <el-table-column label="操作">
-          <el-button
-            size="mini"
-            type="primary"
-            circle
-            icon="el-icon-edit"
-            @click="showPopup = true"
-          />
-          <el-button
-            size="mini"
-            type="danger"
-            circle
-            icon="el-icon-delete"
-          />
-        </el-table-column>
-      </el-table>
-    </div>
-    <div class="data_edit">
-      <blue-popup :show="showPopup" @hide="showPopup = false">
-        <el-form>
-          <el-form-item label="改东西">
-            <el-input />
-          </el-form-item>
-        </el-form>
-      </blue-popup>
+      <blue-table
+        v-loading="loading"
+        :data="tableOptions.data"
+        :options="tableOptions.options"
+        @delItem="delItem"
+        @editItem="editItem"
+      />
     </div>
   </div>
 </template>
 <script>
 import {
-  apiGetRoleList
+  apiGetRoleList,
+  apiEditRoleInfo,
+  apiDeleteRole
 } from '@/api/system'
 export default {
   data() {
     return {
-      showPopup: false,
-      roleList: []
+      loading: false,
+      tableOptions: {
+        data: [],
+        options: [
+          {
+            title: '编号',
+            prop: 'roleId',
+            formItem: true,
+            type: 'text',
+            disabled: true,
+            formOptions: {
+              rules: [
+                { required: true, message: '请输入活动名称', trigger: 'blur' }
+              ]
+            }
+          },
+          {
+            title: '角色名',
+            prop: 'roleName',
+            formItem: true,
+            type: 'text',
+            formOptions: {
+              rules: [
+                { required: true, message: '请输入角色名', trigger: 'blur' }
+              ]
+            }
+          },
+          {
+            title: '角色标识',
+            prop: 'roleKey',
+            formItem: true,
+            type: 'text',
+            formOptions: {
+              rules: [
+                { required: true, message: '请输入角色标识', trigger: 'blur' }
+              ]
+            }
+          },
+          {
+            title: '创建时间',
+            prop: 'createTime',
+            disabled: true,
+            formItem: true,
+            type: 'datetime'
+          },
+          {
+            title: '更新时间',
+            prop: 'updateTime',
+            formItem: true,
+            disabled: true,
+            type: 'datetime'
+          }
+        ]
+      }
     }
   },
 
@@ -51,18 +82,25 @@ export default {
   },
 
   methods: {
+    async delItem(item) {
+      const { roleId } = item
+      await apiDeleteRole(roleId)
+      await this.getRoleList()
+    },
+
+    async editItem(item) {
+      await apiEditRoleInfo(item)
+      await this.getRoleList()
+    },
+
     async getRoleList() {
+      this.loading = true
       const { records } = await apiGetRoleList()
-      this.roleList = records
+      this.tableOptions.data = records
+      this.loading = false
     }
   }
 }
 </script>
 <style lang="less" scoped>
-.container {
-  .data_list {
-  }
-  .data_edit {
-  }
-}
 </style>

@@ -1,15 +1,26 @@
 <template>
   <div class="container">
-    <div class="role_control">
-      <div class="role_control_list">
-        <el-table :data="roleList">
-          <el-table-column label="角色名称" prop="roleName" />
-        </el-table>
-      </div>
+    <div class="role_select">
+      <h1>请选择角色</h1>
+      <el-select
+        v-model="form.roleId"
+        placeholder="请选择"
+        size="mini"
+        @change="selectRole"
+      >
+        <el-option
+          v-for="item in roleList"
+          :key="item.roleId"
+          :label="item.roleName"
+          :value="item.roleId"
+        />
+      </el-select>
+    </div>
+    <div v-loading="loading" class="role_control">
       <div class="role_control_tree">
-        <h1>改角色所拥有的可操作菜单</h1>
         <el-tree
           :data="menuList"
+          :default-checked-keys="checkGroups"
           show-checkbox
           default-expand-all
           node-key="menuId"
@@ -17,6 +28,7 @@
             label: 'menuName',
             children: 'children'
           }"
+          @check="associationRoleMenu"
         >
           <template slot-scope="scope">
             <div class="control">
@@ -55,21 +67,25 @@
 import {
   apiGetMenuList,
   apiGetRoleList,
-  apiGetRoleInfo
+  apiGetRoleMenu,
+  apiAssociationRoleMenu
 } from '@/api/system'
 export default {
   data() {
     return {
+      loading: false,
       showPopup: false,
       menuList: [],
-      roleList: []
+      roleList: [],
+      checkGroups: [],
+      form: {
+        roleId: null
+      }
     }
   },
 
   mounted() {
-    this.getMenuList()
     this.getRoleList()
-    this.getRoleInfo(1)
   },
 
   methods: {
@@ -85,10 +101,13 @@ export default {
       this.roleList = records
     },
 
-    // 获取角色信息
-    async getRoleInfo(roleId) {
-      const mInfo = await apiGetRoleInfo(roleId)
-      console.log(mInfo)
+    // 获取角色菜单
+    async getRoleMenu(roleId) {
+      this.loading = true
+      const mMenu = await apiGetRoleMenu(roleId)
+      this.checkGroups = this.getHasMenu(mMenu)
+      this.menuList = mMenu
+      this.loading = false
     },
 
     // 增加菜单
@@ -99,6 +118,33 @@ export default {
     // 增加菜单
     async delMenu(menuId) {
       console.log(menuId)
+    },
+
+    // 选中角色
+    async selectRole(roleId) {
+      this.form.roleId = roleId
+      this.getRoleMenu(roleId)
+    },
+
+    // 关联角色与菜单 
+    async associationRoleMenu(item) {
+      const { menuId } = item
+      const { roleId }  = this.form
+      await apiAssociationRoleMenu({ menuId, roleId })
+    },
+
+    // 获取角色拥有的菜单项
+    getHasMenu(menu) {
+      let mKey = []
+      menu.forEach(item => {
+        if (item.has) {
+          mKey.push(item.menuId)
+        }
+        if (item.children) {
+          mKey = this.getHasMenu(item.children)
+        }
+      })
+      return mKey
     }
   }
 }
@@ -115,11 +161,6 @@ export default {
     }
     .role_control_tree{
       flex: 1;
-      border-left: 1px solid #f4f4f4;
-      margin-left: 10px;
-      h1{
-        margin: 10px;
-      }
       .control{
         font-size: 13px;
         width: 100%;

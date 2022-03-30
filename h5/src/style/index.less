@@ -29,4 +29,12 @@
 *{
   margin: 0;
   padding: 0;
+  &::-webkit-scrollbar{
+    width: 5px;
+    background-color: rgba(#ccc, .2);
+  }
+  &::-webkit-scrollbar-thumb{
+    background-color: var(--globalColor);
+    border-radius: 50px;
+  }
 }

@@ -8,7 +8,7 @@
         :title="item.title"
         @click="item.callback(item.name)"
       >
-        <svg-icon :svg-name="item.icon" size="1.3em"/>
+        <blue-icon :svg-name="item.icon" size="1.3em"/>
       </div>
     </div>
     <div class="control">

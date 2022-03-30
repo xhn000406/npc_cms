@@ -9,7 +9,7 @@
     </div>
     <div>
       <div>测试封装的图标组件</div>
-      <svg-icon svg-name="home"></svg-icon>
+      <blue-icon svg-name="home"></blue-icon>
     </div>
   </div>
 </template>

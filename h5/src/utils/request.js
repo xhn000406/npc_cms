@@ -33,6 +33,12 @@ request.interceptors.response.use(res => {
     return Promise.reject(mData)
   }
   return mData.data
+}, err => {
+  msgBox({
+    message: err,
+    type: 'error'
+  })
+  return Promise.reject(err)
 })
 
 export default request

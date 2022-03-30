@@ -16,7 +16,9 @@ import '@/style/index.less'
 // 引入elementUI并且暴露出一个全局的消息框函数
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-Vue.prototype.$msgBox = ElementUI.Message
+Vue.prototype.$msgBox = ElementUI.MessageBox
+Vue.prototype.$msg = ElementUI.Message
+
 // console.log(Vue.$msgBox)
 Vue.use(ElementUI)
 
