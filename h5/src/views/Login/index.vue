@@ -3,10 +3,10 @@
     <div class="login_body">
       <el-form>
         <el-form-item label="账号：">
-          <el-input clearable placeholder="请输入账号" v-model="form.password" />
+          <el-input clearable placeholder="请输入账号" v-model="form.username" />
         </el-form-item>
         <el-form-item label="密码：">
-          <el-input clearable placeholder="请输入密码" type="password" v-model="form.username" />
+          <el-input clearable placeholder="请输入密码" type="password" v-model="form.password" />
         </el-form-item>
         <el-form-item style="text-align: right;">
           <router-link to="#">注册</router-link>
@@ -32,14 +32,14 @@ export default {
         username: '123',
         password: '123'
       }
-    };
+    }
   },
   methods: {
     async userLogin() {
       const mToken = await apiUserLogin({ ...this.form })
       if (mToken) {
         setToken(mToken)
-        this.$router.push({ path: '/' })
+        window.location.href = '/'
       }
     }
   }

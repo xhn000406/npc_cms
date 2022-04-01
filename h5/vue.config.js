@@ -20,6 +20,7 @@ module.exports = defineConfig({
       symbolId: "icon-[name]"
     })
   },
+  publicPath: './',
   devServer: {
     open: true,
     host: 'localhost',

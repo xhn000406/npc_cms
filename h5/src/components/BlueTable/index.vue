@@ -19,10 +19,12 @@
         <td v-if="useSelect">
           <el-checkbox />
         </td>
-        <td v-for="(key, n) in options" :key="n">
-          <slot v-if="key.slot" :name="key.slot" :item="item"></slot>
-          <div v-else>{{ item[key.prop] }}</div>
-        </td>
+        <template v-for="(key, n) in options">
+          <td v-if="!key.hidden" :key="n">
+            <slot v-if="key.slot" :name="key.slot" :item="item"></slot>
+            <div v-else>{{ item[key.prop] }}</div>
+          </td>
+        </template>
         <td v-if="useControl">
           <el-button
             size="mini"
@@ -129,7 +131,7 @@ export default {
     },
     useSelect: {
       type: Boolean,
-      default: true
+      default: false
     },
     formName: {
       type: String,
@@ -204,7 +206,7 @@ export default {
     const mTitleGroup = []
     const mRules = {}
     this.options.forEach(item => {
-      mTitleGroup.push(item.title)
+      !item.hidden && mTitleGroup.push(item.title)
       if (item.formItem) {
         const mFormItemOptions = item.formOptions
         if (mFormItemOptions){

@@ -49,6 +49,7 @@ export default {
 
     onSubmit() {
       this.$emit('submit')
+      this.hidePopup()
     }
   }
 }

@@ -141,7 +141,7 @@ export default {
           mKey.push(item.menuId)
         }
         if (item.children) {
-          mKey = this.getHasMenu(item.children)
+          mKey.push(...this.getHasMenu(item.children))
         }
       })
       return mKey
