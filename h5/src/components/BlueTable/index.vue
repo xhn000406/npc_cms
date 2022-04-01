@@ -1,6 +1,39 @@
 <template>
   <div class="container">
-    <el-button @click="selectItem">增加数据</el-button>
+    <div class="data_control">
+      <div></div>
+      <div>
+        <el-button
+          icon="el-icon-plus"
+          size="mini"
+          type="primary"
+          @click="selectItem"
+        >
+          增加数据
+        </el-button>
+        <el-button
+          icon="el-icon-upload2"
+          size="mini"
+        >
+          导入数据
+        </el-button>
+        <el-button
+          icon="el-icon-download"
+          size="mini"
+        >
+          导出数据
+        </el-button>
+        <el-button
+          v-if="useSelect"
+          icon="el-icon-delete"
+          size="mini"
+          type="danger"
+          @click="deleteItems"
+        >
+          删除选中
+        </el-button>
+      </div>
+    </div>
     <table
       class="data_table"
       cellpadding="0"
@@ -8,16 +41,16 @@
     >
       <tr>
         <th v-if="useSelect">
-          <el-checkbox />
+          <input type="checkbox" v-model="checkAll" @change="setCheckAll">
         </th>
         <th v-for="(title, i) in tableOption.titleGroup" :key="i">
           <div>{{ title }}</div>
         </th>
         <th v-if="useControl">操作</th>
       </tr>
-      <tr v-for="(item, i) in data" :key="i">
+      <tr v-for="(item, i) in tableData" :key="i">
         <td v-if="useSelect">
-          <el-checkbox />
+          <input type="checkbox" v-model="item.checked" @change="showDeleteAllButton = true">
         </td>
         <template v-for="(key, n) in options">
           <td v-if="!key.hidden" :key="n">
@@ -45,6 +78,14 @@
         </td>
       </tr>
     </table>
+    <!-- 分页条 -->
+    <div class="data_page">
+      <el-pagination
+        background
+        layout="prev, pager, next"
+        :total="1000"
+      />
+    </div>
     <blue-popup
       :show="showPopup"
       :formName="formName"
@@ -137,7 +178,7 @@ export default {
       type: String,
       default: '编辑数据'
     },
-    data: {
+    tableData: {
       type: Array,
       default: () => []
     },
@@ -156,6 +197,7 @@ export default {
   
   data() {
     return {
+      checkAll: false,
       showPopup: false,
       tableOption: {
         titleGroup: []
@@ -183,22 +225,46 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.$msg({
-          type: 'success',
-          message: '删除成功!'
-        })
         this.$emit('delItem', item)
-      }).catch(() => {
-        this.$msg({
-          type: 'info',
-          message: '已取消删除'
-        })
       })
+    },
+
+    // 删除多选选中项目
+    deleteItems() {
+      const mCheckItems = []
+      this.tableData.map(item => {
+        item.checked && mCheckItems.push(item)
+      })
+      if (mCheckItems.length === 0) {
+        this.$msg({
+          message: '未选中任何条目'
+        })
+      } else {
+        this.$confirm('确定删除选中的条目？', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$emit('delItems', mCheckItems)
+        })
+      }
     },
 
     // 当用户点击了确定修改的按钮
     editItem() {
       this.$emit('editItem', this.selectForm)
+    },
+
+    // 表格全选
+    setCheckAll() {
+      // if (this.checkAll) {
+      //   this.showDeleteAllButton = true
+      // } else {
+      //   this.showDeleteAllButton = false
+      // }
+      this.tableData.forEach(item => {
+        item.checked = this.checkAll
+      })
     }
   },
 
@@ -224,6 +290,18 @@ export default {
 </script>
 <style lang="less" scoped>
 .container {
+  .data_control{
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .data_page{
+    margin: 10px;
+    text-align: right;
+  }
   .data_table {
     text-align: center;
     width: 100%;

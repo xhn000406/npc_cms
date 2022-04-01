@@ -3,10 +3,12 @@
     <div class="data_list">
       <blue-table
         v-loading="loading"
-        :data="tableOptions.data"
+        useSelect
+        :tableData="tableOptions.data"
         :options="tableOptions.options"
         @delItem="delItem"
         @editItem="editItem"
+        @delItems="delItems"
       >
         <div slot="slot_sex" slot-scope="scope">
           <div v-if="scope.item.sex === '0'">男</div>
@@ -108,6 +110,10 @@ export default {
   },
 
   methods: {
+    async delItems(items) {
+      console.log(items)
+    },
+
     async delItem(item) {
       const { userId } = item
       await apiDeleteUser(userId)

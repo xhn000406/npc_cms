@@ -3,7 +3,7 @@
     <div class="data_list">
       <blue-table
         v-loading="loading"
-        :data="tableOptions.data"
+        :tableData="tableOptions.data"
         :options="tableOptions.options"
         @delItem="delItem"
         @editItem="editItem"
