@@ -1,8 +1,45 @@
 <template>
   <div class="container">
     <div class="data_control">
-      <div></div>
-      <div>
+      <div class="data_control_left">
+        <div
+          v-for="i in 3"
+          :key="i"
+          class="search_item"
+        >
+          <el-input
+            placeholder="请输入搜索内容"
+            size="mini"
+          >
+            <el-select
+              slot="prepend"
+              placeholder="请选择"
+            >
+              <el-option
+                v-for="(item, i) in options"
+                :key="i"
+                :label="item.title"
+                :value="item.prop"
+              />
+            </el-select>
+          </el-input>
+        </div>
+        <div>
+          <el-button
+            title="增加搜索项"
+            icon="el-icon-plus"
+            size="mini"
+            type="primary"
+          />
+          <el-button
+            title="搜索"
+            icon="el-icon-search"
+            size="mini"
+            type="primary"
+          />
+        </div>
+      </div>
+      <div class="data_control_right">
         <el-button
           icon="el-icon-plus"
           size="mini"
@@ -199,6 +236,7 @@ export default {
     return {
       checkAll: false,
       showPopup: false,
+      searchForm: [],
       tableOption: {
         titleGroup: []
       },
@@ -290,6 +328,9 @@ export default {
 </script>
 <style lang="less" scoped>
 .container {
+  ::v-deep.el-input-group__prepend{
+    background-color: #fff;
+  }
   .data_control{
     background-color: #f4f4f4;
     padding: 10px;
@@ -297,6 +338,16 @@ export default {
     margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
+    .data_control_left{
+      display: flex;
+      width: 60%;
+      align-items: center;
+      flex-wrap: wrap;
+      .search_item{
+        width: 200px;
+        margin-right: 10px;
+      }
+    }
   }
   .data_page{
     margin: 10px;
