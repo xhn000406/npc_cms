@@ -6,6 +6,7 @@
         useSelect
         :tableData="tableOptions.data"
         :options="tableOptions.options"
+        @searchItem="searchItem"
         @delItem="delItem"
         @editItem="editItem"
         @delItems="delItems"
@@ -36,6 +37,7 @@ export default {
             title: '编号',
             prop: 'userId',
             formItem: true,
+            hidden: true,
             type: 'text',
             disabled: true
           },
@@ -110,6 +112,10 @@ export default {
   },
 
   methods: {
+    async searchItem(item) {
+      console.log(item)
+    },
+
     async delItems(items) {
       console.log(items)
     },

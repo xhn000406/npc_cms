@@ -2,42 +2,10 @@
   <div class="container">
     <div class="data_control">
       <div class="data_control_left">
-        <div
-          v-for="i in 3"
-          :key="i"
-          class="search_item"
-        >
-          <el-input
-            placeholder="请输入搜索内容"
-            size="mini"
-          >
-            <el-select
-              slot="prepend"
-              placeholder="请选择"
-            >
-              <el-option
-                v-for="(item, i) in options"
-                :key="i"
-                :label="item.title"
-                :value="item.prop"
-              />
-            </el-select>
-          </el-input>
-        </div>
-        <div>
-          <el-button
-            title="增加搜索项"
-            icon="el-icon-plus"
-            size="mini"
-            type="primary"
-          />
-          <el-button
-            title="搜索"
-            icon="el-icon-search"
-            size="mini"
-            type="primary"
-          />
-        </div>
+        <select-input
+          :selectOptions="options"
+          @searchItem="searchItem"
+        />
       </div>
       <div class="data_control_right">
         <el-button
@@ -201,7 +169,9 @@
   </div>
 </template>
 <script>
+import SelectInput from './components/SelectInput'
 export default {
+  components: { SelectInput },
   props: {
     useControl: {
       type: Boolean,
@@ -265,6 +235,11 @@ export default {
       }).then(() => {
         this.$emit('delItem', item)
       })
+    },
+
+    // 搜索被点击
+    searchItem(searchItem) {
+      this.$emit('searchItem', searchItem)
     },
 
     // 删除多选选中项目
@@ -339,14 +314,7 @@ export default {
     display: flex;
     justify-content: space-between;
     .data_control_left{
-      display: flex;
       width: 60%;
-      align-items: center;
-      flex-wrap: wrap;
-      .search_item{
-        width: 200px;
-        margin-right: 10px;
-      }
     }
   }
   .data_page{
