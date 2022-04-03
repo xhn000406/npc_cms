@@ -41,6 +41,7 @@ export default {
             title: '角色序号',
             prop: 'roleSort',
             formItem: true,
+            hidden: true,
             type: 'text',
             formOptions: {
               rules: [

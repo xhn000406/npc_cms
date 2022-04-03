@@ -2,9 +2,11 @@
   <div
     v-if="show"
     :class="{
-      blue_popup: true
+      blue_popup: true,
+      [`body_${position}`]: true
     }"
     @click="hidePopup"
+    @pointerdown="onPointerdown"
   >
     <div
       class="body"
@@ -19,7 +21,7 @@
       <div class="body_content">
         <slot></slot>
       </div>
-      <div class="body_button">
+      <div v-if="userButton" class="body_button">
         <div v-throttle class="button button-submit" @click="onSubmit">确定</div>
         <div class="button button-cancel" @click="hidePopup">取消</div>
       </div>
@@ -33,6 +35,14 @@ export default {
       type: Boolean,
       default: false
     },
+    position: {
+      type: String,
+      default: 'right'
+    },
+    userButton: {
+      type: Boolean,
+      default: true
+    },
     formName: {
       type: String,
       default: '编辑数据'
@@ -45,6 +55,13 @@ export default {
   methods: {
     hidePopup() {
       this.$emit('hide')
+    },
+
+    // 设置鼠标焦点，以防鼠标焦点溢出
+    onPointerdown(event) {
+      const mDom = event.target
+      const mPointerId = event.pointerId
+      mDom && mDom.setPointerCapture && mDom.setPointerCapture(mPointerId)
     },
 
     onSubmit() {
@@ -73,9 +90,21 @@ export default {
   z-index: 10000;
   display: flex;
   flex-flow: column;
-  align-items: flex-end;
-  box-shadow: 0 0 4px 1px #ccc;
+  &.body_right{
+    align-items: flex-end;
+  }
+  &.body_center{
+    align-items: center;
+    justify-content: center;
+    .body{
+      overflow: hidden;
+      border-radius: 5px;
+      height: auto;
+      max-height: 80vh;
+    }
+  }
   .body{
+    box-shadow: 0 0 4px 1px #ccc;
     min-width: 500px;
     height: 100%;
     background-color: #fff;

@@ -5,12 +5,6 @@
 </template>
 <script>
 export default {
-  props: {
-    selectOptions: {
-      type: Object,
-      default: () => {}
-    }
-  },
   data() {
     return {}
   }

@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 
 // 获取角色列表
-export const apiGetRoleList = () => request.get('/system/role/list')
+export const apiGetRoleList = (params) => request.get('/system/role/list', { params })
 
 // 获取角色
 export const apiGetRoleInfo = (roleId) => request.get(`/system/role/${roleId}`)
@@ -19,7 +19,7 @@ export const apiDeleteRole = (roleId) => request.delete(`/system/role/${roleId}`
 export const apiGetRoleMenu = (roleId) => request.get(`/system/role/getMenuByRole/${roleId}`)
 
 // 获取用户列表
-export const apiGetUserList = () => request.get('/system/user/list')
+export const apiGetUserList = (params) => request.get('/system/user/list', { params })
 
 // 增加用户
 export const apiAddUser = (data) => request.post('/system/user', data)

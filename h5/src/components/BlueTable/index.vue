@@ -1,5 +1,7 @@
 <template>
-  <div class="container">
+  <div
+    class="container"
+  >
     <div class="data_control">
       <div class="data_control_left">
         <select-input
@@ -19,6 +21,7 @@
         <el-button
           icon="el-icon-upload2"
           size="mini"
+          @click="showUpload = true"
         >
           导入数据
         </el-button>
@@ -88,9 +91,11 @@
       <el-pagination
         background
         layout="prev, pager, next"
-        :total="1000"
+        :total="totalCount"
+        @current-change="changePage"
       />
     </div>
+    <!-- 编辑表单 -->
     <blue-popup
       :show="showPopup"
       :formName="formName"
@@ -153,6 +158,7 @@
               v-model="selectForm[item.prop]"
               placeholder="请选择"
               size="mini"
+              :multiple="item.multiple"
               :disabled="item.disabled"
             >
               <el-option
@@ -166,6 +172,15 @@
         </template>
       </el-form>
     </blue-popup>
+    <blue-popup
+      position="center"
+      formName="上传附件"
+      :userButton="false"
+      :show="showUpload"
+      @hide="showUpload = false"
+    >
+      
+    </blue-popup>
   </div>
 </template>
 <script>
@@ -173,6 +188,10 @@ import SelectInput from './components/SelectInput'
 export default {
   components: { SelectInput },
   props: {
+    totalCount: {
+      type: Number,
+      default: 0
+    },
     useControl: {
       type: Boolean,
       default: true
@@ -206,6 +225,7 @@ export default {
     return {
       checkAll: false,
       showPopup: false,
+      showUpload: false,
       searchForm: [],
       tableOption: {
         titleGroup: []
@@ -270,15 +290,15 @@ export default {
 
     // 表格全选
     setCheckAll() {
-      // if (this.checkAll) {
-      //   this.showDeleteAllButton = true
-      // } else {
-      //   this.showDeleteAllButton = false
-      // }
       this.tableData.forEach(item => {
         item.checked = this.checkAll
       })
-    }
+    },
+
+    // 当前页面被改变
+    changePage(currentPage) {
+      this.$emit('pageChange', currentPage)
+    } 
   },
 
   mounted() {

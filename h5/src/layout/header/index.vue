@@ -1,15 +1,13 @@
 <template>
   <header>
-    <div class="header_left">体质健康监测系统v1.0-Beta</div>
+    <div class="header_left">{{ systemInfo.title }}</div>
     <div class="header_right">
-      <!-- <router-link :to="{ name: 'Login' }">登陆</router-link>
-      <router-link :to="{ name: 'Login' }">注册</router-link> -->
       <el-dropdown
         v-if="getToken"
         trigger="click"
       >
         <span class="el-dropdown-link">
-          <span>欢迎您：13025223354</span>
+          <span>欢迎您：{{ getUserInfo.nickName }}</span>
           <i class="el-icon-arrow-down el-icon--right" />
         </span>
         <el-dropdown-menu slot="dropdown">
@@ -23,17 +21,21 @@
   </header>
 </template>
 <script>
+import config from '@/config'
 import { getToken, delToken } from '@/utils/session'
 import Logo from '@/assets/logo.png'
+import { mapGetters } from 'vuex'
 export default {
   computed: {
+    ...mapGetters(['getUserInfo']),
     getToken() {
       return getToken()
     }
   },
   data () {
     return {
-      Logo
+      Logo,
+      systemInfo: config.SYSTEM_INFO
     }
   },
 

@@ -124,6 +124,7 @@ export default {
     }
     select {
       margin-right: 5px;
+      appearance: none;
     }
     input{
       width: 200px;

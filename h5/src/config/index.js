@@ -1,4 +1,8 @@
 const mConfig = {
+  // 全局信息
+  SYSTEM_INFO: {
+    title: '体质健康监测系统v1.0-Beta'
+  },
   // 请求状态码
   STATUS_CODE: {
     success: 200,
