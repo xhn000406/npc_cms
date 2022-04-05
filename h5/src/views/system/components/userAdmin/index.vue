@@ -1,9 +1,8 @@
 <template>
   <div class="container">
-    <div class="data_list">
+    <div v-loading="loading" class="data_list">
       <blue-table
         v-if="tableOptions.options[0]"
-        v-loading="loading"
         useSelect
         :tableData="tableOptions.data"
         :options="tableOptions.options"
@@ -114,7 +113,7 @@ export default {
         },
         {
           title: '账号',
-          prop: 'userName',
+          prop: 'userNo',
           formItem: true,
           type: 'text',
           formOptions: {
@@ -174,21 +173,8 @@ export default {
               { required: true, message: '请选择性别', trigger: 'change' }
             ]
           }
-        },
-        {
-          title: '创建时间',
-          prop: 'createTime',
-          formItem: true,
-          type: 'datetime'
-        },
-        {
-          title: '更新时间',
-          prop: 'updateTime',
-          formItem: true,
-          type: 'datetime'
         }
       ]
-
       this.loading = false
     }
   }

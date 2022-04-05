@@ -90,13 +90,13 @@ export default {
           {
             title: '创建时间',
             prop: 'createTime',
-            formItem: true,
+            hidden: true,
             type: 'datetime'
           },
           {
             title: '更新时间',
             prop: 'updateTime',
-            formItem: true,
+            hidden: true,
             type: 'datetime'
           }
         ]

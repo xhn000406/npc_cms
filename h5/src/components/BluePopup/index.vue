@@ -117,6 +117,9 @@ export default {
       flex: 1;
       padding: 20px;
       overflow: auto;
+      &::-webkit-scrollbar{
+        display: none;
+      }
     }
     .body_button{
       display: flex;

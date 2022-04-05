@@ -1,7 +1,8 @@
 const mConfig = {
   // 全局信息
   SYSTEM_INFO: {
-    title: '体质健康监测系统v1.0-Beta'
+    title: '体质健康监测系统v1.0-Beta',
+    uploadApi: '/api/file/upload'
   },
   // 请求状态码
   STATUS_CODE: {

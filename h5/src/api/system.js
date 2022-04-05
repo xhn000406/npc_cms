@@ -18,6 +18,9 @@ export const apiDeleteRole = (roleId) => request.delete(`/system/role/${roleId}`
 // 获取角色路由
 export const apiGetRoleMenu = (roleId) => request.get(`/system/role/getMenuByRole/${roleId}`)
 
+// 增加角色路由
+export const apiAddRoleMenu = (data) => request.post('/system/menu', data)
+
 // 获取用户列表
 export const apiGetUserList = (params) => request.get('/system/user/list', { params })
 

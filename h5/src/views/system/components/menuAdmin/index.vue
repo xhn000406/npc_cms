@@ -15,10 +15,12 @@
           :value="item.roleId"
         />
       </el-select>
+      <el-button @click="showAddMenuForm(0)">增加路由</el-button>
     </div>
     <div v-loading="loading" class="role_control">
       <div class="role_control_tree">
         <el-tree
+          :check-strictly="true"
           :data="menuList"
           :default-checked-keys="checkGroups"
           show-checkbox
@@ -38,7 +40,7 @@
               <div @click.stop>
                 <span
                   class="button"
-                  @click="addMenu"
+                  @click="showAddMenuForm(scope.data.menuId)"
                 >
                   增加菜单
                 </span>
@@ -60,7 +62,69 @@
         </el-tree>
       </div>
     </div>
-    <blue-popup :show="showPopup" @hide="showPopup = false">sss</blue-popup>
+    <blue-popup
+      :show="showPopup"
+      formName="增加菜单"
+      @hide="showPopup = false"
+      @submit="addMenu"
+    >
+      <el-form
+        :model="menuForm"
+        :rules="rules"
+      >
+        <el-form-item label="编号" prop="parentId">
+          <el-input
+            v-model="menuForm.parentId"
+            disabled
+            size="mini"
+          />
+        </el-form-item>
+        <el-form-item label="菜单类型" prop="menuType">
+          <el-select
+            v-model="menuForm.menuType"
+            size="mini"
+          >
+            <el-option label="目录" value="M" />
+            <el-option label="菜单" value="C" />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="名称" prop="menuName">
+          <el-input
+            v-model="menuForm.menuName"
+            size="mini"
+            placeholder="例如：年度管理"
+          />
+        </el-form-item>
+        <el-form-item label="组件路径" prop="component">
+          <el-input
+            v-model="menuForm.component"
+            placeholder="例如：baseInfo/components/yearAdmin"
+            size="mini"
+          />
+        </el-form-item>
+        <el-form-item label="浏览器显示标识符" prop="path">
+          <el-input
+            v-model="menuForm.path"
+            placeholder="例如：yearAdmin"
+            size="mini"
+          />
+        </el-form-item>
+        <el-form-item label="路由跳转标志符" prop="url">
+          <el-input
+            v-model="menuForm.url"
+            placeholder="例如：YearAdmin"
+            size="mini"
+          />
+        </el-form-item>
+        <el-form-item label="图标" prop="icon">
+          <el-input
+            v-model="menuForm.icon"
+            size="mini"
+            placeholder="例如：menu_set"
+          />
+        </el-form-item>
+      </el-form>
+    </blue-popup>
   </div>
 </template>
 <script>
@@ -68,6 +132,7 @@ import {
   apiGetMenuList,
   apiGetRoleList,
   apiGetRoleMenu,
+  apiAddRoleMenu,
   apiAssociationRoleMenu
 } from '@/api/system'
 export default {
@@ -80,6 +145,38 @@ export default {
       checkGroups: [],
       form: {
         roleId: null
+      },
+      menuForm: {
+        parentId: 0,
+        component: null,
+        createUserno: null,
+        icon: null,
+        menuName: null,
+        menuType: 'C',
+        path: null,
+        query: null,
+        remark: null,
+        url: null
+      },
+      rules: {
+        component: [
+          { required: true, message: '请输入组件路径', trigger: 'blur' }
+        ],
+        menuName: [
+          { required: true, message: '请输入菜单名称', trigger: 'blur' }
+        ],
+        menuType: [
+          { required: true, message: '请选择菜单类型', trigger: 'change' }
+        ],
+        path: [
+          { required: true, message: '请输入浏览器显示标识符', trigger: 'blur' }
+        ],
+        url: [
+          { required: true, message: '请输入路由跳转标志符', trigger: 'blur' }
+        ],
+        icon: [
+          { required: true, message: '请输入菜单图标', trigger: 'blur' }
+        ],
       }
     }
   },
@@ -112,6 +209,11 @@ export default {
 
     // 增加菜单
     async addMenu() {
+      apiAddRoleMenu(this.menuForm)
+    },
+
+    showAddMenuForm(parentId) {
+      this.menuForm.parentId = parentId
       this.showPopup = true
     },
 

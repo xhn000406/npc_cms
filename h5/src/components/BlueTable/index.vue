@@ -86,6 +86,12 @@
         </td>
       </tr>
     </table>
+    <div
+      v-if="!tableData[0]"
+      class="noContext"
+    >
+      没东西喔
+    </div>
     <!-- 分页条 -->
     <div class="data_page">
       <el-pagination
@@ -115,6 +121,15 @@
           >
             <el-input
               v-if="item.type === 'text'"
+              clearable
+              size="mini"
+              :placeholder="'请输入' + item.title"
+              :disabled="item.disabled"
+              v-model="selectForm[item.prop]"
+            />
+            <el-input
+              v-if="item.type === 'textarea'"
+              type="textarea"
               clearable
               size="mini"
               :placeholder="'请输入' + item.title"
@@ -179,14 +194,15 @@
       :show="showUpload"
       @hide="showUpload = false"
     >
-      
+      <upload-panel />
     </blue-popup>
   </div>
 </template>
 <script>
+import UploadPanel from './components/UploadPanel'
 import SelectInput from './components/SelectInput'
 export default {
-  components: { SelectInput },
+  components: { SelectInput, UploadPanel },
   props: {
     totalCount: {
       type: Number,
@@ -368,5 +384,13 @@ export default {
       }
     }
   }
+}
+.noContext{
+  padding: 20px;
+  user-select: none;
+  text-align: center;
+  font-size: 12px;
+  color: #ccc;
+  border-bottom: 1px solid #f4f4f4;
 }
 </style>
