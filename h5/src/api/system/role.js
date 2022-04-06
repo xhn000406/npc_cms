@@ -20,24 +20,3 @@ export const apiGetRoleMenu = (roleId) => request.get(`/system/role/getMenuByRol
 
 // 增加角色路由
 export const apiAddRoleMenu = (data) => request.post('/system/menu', data)
-
-// 获取用户列表
-export const apiGetUserList = (params) => request.get('/system/user/list', { params })
-
-// 增加用户
-export const apiAddUser = (data) => request.post('/system/user', data)
-
-// 删除用户
-export const apiDeleteUser = (userId) => request.delete(`/system/user/${userId}`)
-
-// 修改用户
-export const apiEditUserInfo = (data) => request.put(`/system/user`, data)
-
-// 获取菜单列表
-export const apiGetMenuList = () => request.get('/system/menu/list')
-
-// 关联角色与菜单
-export const apiAssociationRoleMenu = (data) => request.post('/core/associationRoleMenu', data)
-
-// 关联角色与用户
-export const apiAssociationUserRole = (data) => request.post('/core/associationUserRole', data)

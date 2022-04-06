@@ -6,10 +6,13 @@
       :tableData="tableOptions.yearList"
       :totalCount="tableOptions.totalCount"
       :options="tableOptions.options"
+      :uploadApi="apiUpload"
+      @exportData="exportData"
       @editItem="editItem"
       @delItem="delItem"
       @delItems="delItem"
       @searchItem="searchItem"
+      @downloadTemplate="downloadTemplate"
     >
       <div slot="slot_status" slot-scope="scope">
         <el-tag v-if="scope.item.yearStatus === 1" size="mini">正常</el-tag>
@@ -23,11 +26,18 @@ import {
   apiGetYearAdminList,
   apiEditYearAdminList,
   apiAddYearAdminList,
-  apiDelYearAdminList
-} from '@/api/baseInfo'
+  apiDelYearAdminList,
+  apiExportYearAdminList,
+  apiYearAdminTemplate,
+  apiUpload
+} from '@/api/baseInfo/year'
+import {
+  analysisBlob
+} from '@/utils/utils'
 export default {
   data () {
     return {
+      apiUpload,
       loading: false,
       tableOptions: {
         yearList: [],
@@ -106,6 +116,18 @@ export default {
       this.tableOptions.yearList = mYearList
       this.tableOptions.totalCount = totalCount
       this.loading = false
+    },
+
+    // 导出数据
+    async exportData() {
+      // 使用blob流进行下载
+      analysisBlob(await apiExportYearAdminList())
+    },
+
+    // 下载导出模板
+    async downloadTemplate() {
+      // 使用blob流进行下载
+      analysisBlob(await apiYearAdminTemplate())
     },
 
     // 修改

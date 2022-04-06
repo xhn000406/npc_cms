@@ -34,12 +34,14 @@
 </template>
 <script>
 import {
+  apiGetRoleList
+} from '@/api/system/role'
+import {
   apiAddUser,
   apiGetUserList,
   apiDeleteUser,
-  apiEditUserInfo,
-  apiGetRoleList
-} from '@/api/system'
+  apiEditUserInfo
+} from '@/api/system/user'
 export default {
   data() {
     return {

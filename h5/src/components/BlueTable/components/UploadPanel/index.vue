@@ -1,10 +1,11 @@
 <template>
   <div class="container">
+    <el-button @click="$emit('downloadTemplate')">下载模板</el-button>
     <el-upload
       drag
       multiple
       name="file"
-      :action="SYSTEM_INFO.uploadApi"
+      :action="uploadApi"
       :headers="requestHeaders"
     >
       <i class="el-icon-upload"></i>
@@ -13,12 +14,11 @@
   </div>
 </template>
 <script>
-import config from '@/config'
 import { getToken } from '@/utils/session'
 export default {
+  props: ['uploadApi'],
   data() {
     return {
-      SYSTEM_INFO: config.SYSTEM_INFO,
       requestHeaders: {
         token: getToken()
       }

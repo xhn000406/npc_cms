@@ -26,8 +26,10 @@
           导入数据
         </el-button>
         <el-button
+          v-throttle
           icon="el-icon-download"
           size="mini"
+          @click="$emit('exportData')"
         >
           导出数据
         </el-button>
@@ -194,7 +196,10 @@
       :show="showUpload"
       @hide="showUpload = false"
     >
-      <upload-panel />
+      <upload-panel
+        :uploadApi="uploadApi"
+        @downloadTemplate="$emit('downloadTemplate')"
+      />
     </blue-popup>
   </div>
 </template>
@@ -204,6 +209,10 @@ import SelectInput from './components/SelectInput'
 export default {
   components: { SelectInput, UploadPanel },
   props: {
+    uploadApi: {
+      type: String,
+      default: ''
+    },
     totalCount: {
       type: Number,
       default: 0
@@ -227,13 +236,6 @@ export default {
     options: {
       type: Array,
       default: () => []
-    }
-  },
-
-  computed: {
-    formatDate(date) {
-      console.log(date)
-      return date
     }
   },
   

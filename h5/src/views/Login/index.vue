@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <h1>大学生体质健康状况检测系统 v1.0</h1>
     <div class="login_body">
       <el-form>
         <el-form-item label="账号：">
@@ -29,8 +30,8 @@ export default {
   data() {
     return {
       form: {
-        username: '123',
-        password: '123'
+        username: 'admin',
+        password: 'admin'
       }
     }
   },
@@ -47,6 +48,10 @@ export default {
 </script>
 <style lang="less" scoped>
 .container {
+  h1{
+    margin: 20px 0;
+    color: #fff;
+  }
   height: 100vh;
   width: 100vw;
   display: flex;

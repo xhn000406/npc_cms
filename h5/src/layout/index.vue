@@ -6,11 +6,12 @@
       <section>
         <layout-nav />
         <article>
+          <router-view />
           <!-- 路由缓存机制 -->
-          <keep-alive v-if="$route.meta.keepAlive">
+          <!-- <keep-alive v-if="$route.meta.keepAlive">
             <router-view />
           </keep-alive>
-          <router-view v-else />
+          <router-view v-else /> -->
         </article>
       </section>
     </main>

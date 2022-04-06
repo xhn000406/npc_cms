@@ -22,7 +22,7 @@ import {
   apiEditRoleInfo,
   apiDeleteRole,
   apiAddRole
-} from '@/api/system'
+} from '@/api/system/role'
 export default {
   data() {
     return {

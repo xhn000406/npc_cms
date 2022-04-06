@@ -19,6 +19,9 @@ request.interceptors.request.use(config => {
 
 // 响应拦截器
 request.interceptors.response.use(res => {
+  if (res.config.responseType === 'blob') {
+    return res.data
+  }
   const mData = res.data
   const mStatus = res.status
   if (
