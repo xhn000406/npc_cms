@@ -1,8 +1,6 @@
 import router, { asyncRoutes } from '@/router'
 import ElementUI from 'element-ui'
-import {
-  apiGetUserInfo
-} from '@/api/user'
+import { apiGetUserInfo } from '@/api/user'
 import store from '@/store'
 /**
  * 导航守卫

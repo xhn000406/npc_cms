@@ -12,7 +12,7 @@
         </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>
-            <div @click="popup = true">个人信息</div>
+            <div @click="editInfo">个人信息</div>
           </el-dropdown-item>
           <el-dropdown-item>
             <div @click="exitLogin">退出登陆</div>
@@ -83,7 +83,7 @@ export default {
     },
 
     editInfo() {
-      
+      this.$router.push({ name: 'Info' })
     }
   }
 }

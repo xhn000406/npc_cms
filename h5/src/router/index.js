@@ -10,9 +10,7 @@ export const asyncRoutes = [
   {
     path: '/',
     name: 'Layout',
-    redirect: {
-      name: 'Home'
-    },
+    redirect: { name: 'Home' },
     component: () => import('@/layout'),
     children: [
       {
@@ -23,6 +21,17 @@ export const asyncRoutes = [
           title: '首页',
           icon: 'menu_home',
           keepAlive: true
+        }
+      },
+      {
+        path: 'info',
+        name: 'Info',
+        component: () => import('@/views/info'),
+        meta: {
+          title: '个人信息',
+          icon: 'menu_info',
+          keepAlive: true,
+          hidden: true
         }
       }
     ]
