@@ -2,6 +2,7 @@ const {
   defineConfig
 } = require('@vue/cli-service')
 const BASEURL = process.env.BASEURL
+console.log(BASEURL)
 const path = require('path')
 module.exports = defineConfig({
   transpileDependencies: true,

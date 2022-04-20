@@ -4,6 +4,7 @@
       <blue-table
         v-if="tableOptions.options[0]"
         useSelect
+        :button="['add', 'del']"
         :tableData="tableOptions.data"
         :options="tableOptions.options"
         :totalCount="tableOptions.totalCount"

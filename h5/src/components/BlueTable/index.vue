@@ -12,7 +12,19 @@
     </div>
     <div class="data_control">
       <div class="data_control_right">
-        <el-button
+        <template v-for="(button, i) in buttonGroup">
+          <el-button
+            v-if="button.show"
+            :key="i"
+            :icon="button.icon"
+            :type="button.type"
+            size="mini"
+            @click="buttonClick(button.event)"
+          >
+            {{ button.title }}
+          </el-button>
+        </template>
+        <!-- <el-button
           icon="el-icon-plus"
           size="mini"
           type="primary"
@@ -43,7 +55,7 @@
           @click="deleteItems"
         >
           删除选中
-        </el-button>
+        </el-button> -->
       </div>
     </div>
     <table
@@ -238,7 +250,12 @@ export default {
     options: {
       type: Array,
       default: () => []
-    }
+    },
+    button: {
+      type: Array,
+      default: () => []
+    },
+    
   },
   
   data() {
@@ -255,11 +272,32 @@ export default {
         rules: []
       },
       checkItems: [],
-      selectForm: {}
+      selectForm: {},
+      buttonGroup: [
+        { title: '增加数据', show: true, type: 'primary', icon: 'el-icon-plus', event: 'add' },
+        { title: '导入数据', show: true, type: 'default', icon: 'el-icon-upload2', event: 'import' },
+        { title: '导出数据', show: true, type: 'default', icon: 'el-icon-download', event: 'export' },
+        { title: '删除选中', show: this.useSelect, type: 'danger', icon: 'el-icon-delete', event: 'del' }
+      ]
     }
   },
 
   methods: {
+    buttonClick(type) {
+      if (type === 'add') {
+        this.selectItem({})
+      }
+      if (type === 'import') {
+        this.showUpload = true
+      }
+      if (type === 'download') {
+        this.$emit('exportData')
+      }
+      if (type === 'del') {
+        this.deleteItems()
+      }
+    },
+
     // 选中某一条表项进行修改
     selectItem(item) {
       this.showPopup = true
@@ -322,6 +360,9 @@ export default {
   },
 
   mounted() {
+    if (this.button.length > 0) {
+      this.buttonGroup = this.buttonGroup.filter(item => this.button.indexOf(item.event) !== -1)
+    }
     const mTitleGroup = []
     const mRules = {}
     this.options.forEach(item => {

@@ -3,6 +3,7 @@
     <div class="data_list">
       <blue-table
         v-loading="loading"
+        :button="['add', 'del']"
         :tableData="tableOptions.data"
         :options="tableOptions.options"
         @delItem="delItem"

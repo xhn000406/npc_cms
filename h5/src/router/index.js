@@ -5,6 +5,30 @@ import 'nprogress/nprogress.css'
 import power from '@/beforeEach'
 Vue.use(VueRouter)
 
+// 动态路由
+export const asyncRoutes = [
+  {
+    path: '/',
+    name: 'Layout',
+    redirect: {
+      name: 'Home'
+    },
+    component: () => import('@/layout'),
+    children: [
+      {
+        path: 'home',
+        name: 'Home',
+        component: () => import('@/views/home'),
+        meta: {
+          title: '首页',
+          icon: 'menu_home',
+          keepAlive: true
+        }
+      }
+    ]
+  }
+]
+
 // 固定路由
 export const generalRoutes = [
   {
