@@ -151,7 +151,7 @@ export default {
         },
         {
           title: '手机号',
-          prop: 'phonenumber',
+          prop: 'phoneNumber',
           formItem: true,
           type: 'text',
           formOptions: {

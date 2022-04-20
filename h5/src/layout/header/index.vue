@@ -11,13 +11,41 @@
           <i class="el-icon-arrow-down el-icon--right" />
         </span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>个人信息</el-dropdown-item>
+          <el-dropdown-item>
+            <div @click="popup = true">个人信息</div>
+          </el-dropdown-item>
           <el-dropdown-item>
             <div @click="exitLogin">退出登陆</div>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
+    <blue-popup
+      formName="编辑用户信息"
+      position="center"
+      :useButton="false"
+      :show="popup"
+      @hide="popup = false"
+    >
+      <el-form>
+        <el-form-item label="用户名">
+          <el-input
+            size="mini"
+            placeholder="请输入用户名"
+          />
+        </el-form-item>
+        <el-form-item label="账号">
+          <el-input size="mini" placeholder="请输入账号" />
+        </el-form-item>
+        <el-form-item label="密码">
+          <el-input
+            size="mini"
+            type="password"
+            placeholder="请输入密码"
+          />
+        </el-form-item>
+      </el-form>
+    </blue-popup>
   </header>
 </template>
 <script>
@@ -35,7 +63,16 @@ export default {
   data () {
     return {
       Logo,
-      systemInfo: config.SYSTEM_INFO
+      systemInfo: config.SYSTEM_INFO,
+      popup: false,
+      infoForm: {
+        params: {
+
+        },
+        rules: [
+
+        ]
+      }
     }
   },
 
@@ -43,6 +80,10 @@ export default {
     exitLogin() {
       delToken()
       this.$router.push({ name: 'Login' })
+    },
+
+    editInfo() {
+      
     }
   }
 }

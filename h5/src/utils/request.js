@@ -7,7 +7,7 @@ import {
 } from './session'
 const msgBox = ElementUI.Message
 const request = axios.create({
-  baseURL: '/api',
+  baseURL: config.SYSTEM_INFO.baseUrl,
   timeout: 1000 * 10
 })
 // 请求拦截器

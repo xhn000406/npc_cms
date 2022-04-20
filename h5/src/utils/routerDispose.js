@@ -1,5 +1,5 @@
 // 通过这种方式加载动态路由的组件
-const _import = require('./_import_' + process.env.NODE_ENV)
+// const _import = require('./_import_' + process.env.NODE_ENV)
 // 递归去处理动态路由
 export const disposeRemoteRouters = (routers) => {
   let mRouters = []
@@ -8,7 +8,7 @@ export const disposeRemoteRouters = (routers) => {
     mRouters.push({
       path: router.path,
       name: router.url,
-      component: _import(router.component),
+      component: () => import(`@/views/${router.component}`),
       children: router.children,
       meta: {
         title: router.menuName,

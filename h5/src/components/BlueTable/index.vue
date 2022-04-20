@@ -9,6 +9,8 @@
           @searchItem="searchItem"
         />
       </div>
+    </div>
+    <div class="data_control">
       <div class="data_control_right">
         <el-button
           icon="el-icon-plus"
@@ -191,8 +193,8 @@
     </blue-popup>
     <blue-popup
       position="center"
-      formName="上传附件"
-      :userButton="false"
+      formName="导入数据"
+      :useButton="false"
       :show="showUpload"
       @hide="showUpload = false"
     >
@@ -316,7 +318,7 @@ export default {
     // 当前页面被改变
     changePage(currentPage) {
       this.$emit('pageChange', currentPage)
-    } 
+    }
   },
 
   mounted() {
@@ -351,8 +353,10 @@ export default {
     margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
-    .data_control_left{
-      width: 60%;
+    .data_control_right{
+      display: flex;
+      flex: 1;
+      justify-content: flex-end;
     }
   }
   .data_page{

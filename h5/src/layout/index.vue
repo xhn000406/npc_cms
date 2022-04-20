@@ -53,12 +53,12 @@ export default {
     z-index: 1;
   }
   main{
-    z-index: 1;
+    // z-index: 1;
     flex: 1;
     display: flex;
     flex-shrink: 0;
     aside{
-      z-index: 1;
+      // z-index: 1;
       // width: 250px;
       background-color: var(--globalAsideBackground);
       box-shadow: 0 2px 4px 1px #e0e0e0;

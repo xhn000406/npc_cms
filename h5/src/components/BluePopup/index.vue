@@ -21,7 +21,7 @@
       <div class="body_content">
         <slot></slot>
       </div>
-      <div v-if="userButton" class="body_button">
+      <div v-if="useButton" class="body_button">
         <div v-throttle class="button button-submit" @click="onSubmit">确定</div>
         <div class="button button-cancel" @click="hidePopup">取消</div>
       </div>
@@ -39,7 +39,7 @@ export default {
       type: String,
       default: 'right'
     },
-    userButton: {
+    useButton: {
       type: Boolean,
       default: true
     },
@@ -87,7 +87,7 @@ export default {
   background-color: rgba(0,0,0,.3);
   top: 0;
   left: 0;
-  z-index: 10000;
+  z-index: 100;
   display: flex;
   flex-flow: column;
   &.body_right{

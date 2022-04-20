@@ -10,7 +10,7 @@ import store from '@/store'
 // 导航守卫
 let mRouters
 
-export default (async (to, from, next) => {
+const beforeEach = (async (to, from, next) => {
   if (to.name === 'Login') {
     next()
   } else {
@@ -50,7 +50,7 @@ export default (async (to, from, next) => {
         store.commit('setUserRule', permissions)
         store.commit('setUserInfo', user)
         mSyncRoutes.forEach(item => router.addRoute(item))
-        next({ path: '/' })
+        next({ path: to.path })
       } catch {
         ElementUI.Message({
           message: '获取路由异常',
@@ -63,3 +63,5 @@ export default (async (to, from, next) => {
     }
   }
 })
+
+export default beforeEach
