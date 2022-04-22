@@ -14,3 +14,9 @@ export const apiAssociationRoleMenu = (data) => request.post('/core/associationR
 
 // 关联角色与用户
 export const apiAssociationUserRole = (data) => request.post('/core/associationUserRole', data)
+
+// 移除关联角色与菜单
+export const apiRemoveRoleMenu = (data) => request.post('/core/removeRoleMenu', data)
+
+// 移除关联角色与用户
+export const apiRemoveUserRole = (data) => request.post('/core/removeRoleUserRole', data)

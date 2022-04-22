@@ -12,6 +12,10 @@ module.exports = {
   },
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-mixed-spaces-and-tabs': 2,
+    'no-var': 2,
+    'comma-spacing': 2,
+    "eqeqeq": 2,
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'vue/multi-word-component-names': 'off'
   }

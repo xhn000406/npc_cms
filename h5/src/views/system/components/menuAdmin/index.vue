@@ -42,6 +42,7 @@
               </div>
               <div @click.stop>
                 <span
+                  v-if="scope.data.menuType !== 'F'"
                   class="button"
                   @click="showAddMenuForm(scope.data.menuId)"
                 >
@@ -135,6 +136,7 @@
 import {
   apiGetMenuList,
   apiAssociationRoleMenu,
+  apiRemoveRoleMenu,
   apiEditMenuItem
 } from '@/api/system/menu'
 import {
@@ -261,9 +263,18 @@ export default {
 
     // 关联角色与菜单 
     async associationRoleMenu(item) {
-      const { menuId } = item
+      console.log(item)
+      const { menuId, has } = item
       const { roleId }  = this.form
-      await apiAssociationRoleMenu({ menuId, roleId })
+      if (has) {
+        await apiRemoveRoleMenu({ menuId, roleId })
+      } else {
+        await apiAssociationRoleMenu({ menuId, roleId })
+      }
+      this.$msg({
+        message: '操作成功',
+        type: 'success'
+      })
     },
 
     // 获取角色拥有的菜单项

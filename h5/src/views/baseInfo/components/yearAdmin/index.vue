@@ -120,6 +120,7 @@ export default {
 
     // 导出数据
     async exportData() {
+      console.log('111')
       // 使用blob流进行下载
       analysisBlob(await apiExportYearAdminList(), '年度管理导出数据')
     },

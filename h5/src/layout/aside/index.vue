@@ -64,7 +64,7 @@ aside{
     ::v-deep.el-menu{
       background-color: transparent;
     }
-    background-color: var(--globalAsideBackground);
+    background-color: var(--globalColor);
     border-right: none;
     ::v-deep.el-menu-item,::v-deep.el-submenu__title{
       color: #fff;

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>大学生体质健康状况监测系统 v1.0</h1>
+    <h1>大学生体质健康状况检测系统 v1.0</h1>
     <div class="login_body">
       <el-form>
         <el-form-item label="账号：">

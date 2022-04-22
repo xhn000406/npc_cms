@@ -290,7 +290,7 @@ export default {
       if (type === 'import') {
         this.showUpload = true
       }
-      if (type === 'download') {
+      if (type === 'export') {
         this.$emit('exportData')
       }
       if (type === 'del') {

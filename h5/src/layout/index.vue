@@ -57,11 +57,13 @@ export default {
     flex: 1;
     display: flex;
     flex-shrink: 0;
+    transition: background .5s;
     aside{
       // z-index: 1;
       // width: 250px;
-      background-color: var(--globalAsideBackground);
+      background-color: var(--globalColor);
       box-shadow: 0 2px 4px 1px #e0e0e0;
+      transition: background .2s;
     }
     section{
       flex: 1;
@@ -71,9 +73,11 @@ export default {
         margin: 10px;
         margin-bottom: 0;
         border-radius: 10px;
+        transition: background .2s;
         // padding: 10px;
       }
       article{
+        transition: background .2s;
         padding: 10px;
         background-color: #fff;
         flex: 1;
