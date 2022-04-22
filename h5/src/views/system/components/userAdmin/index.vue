@@ -18,6 +18,10 @@
           <div v-if="scope.item.sex === '0'">男</div>
           <div v-else>女</div>
         </div>
+        <div slot="slot_userType" slot-scope="scope">
+          <el-tag size="mini" type="primary" v-if="scope.item.userType === '1'">学生</el-tag>
+          <el-tag size="mini" type="primary" v-if="scope.item.userType === '2'">教工</el-tag>
+        </div>
         <div slot="slot_roleNamesList" slot-scope="scope">
           <el-tag
             v-for="(item, i) in scope.item.roleNamesList"
@@ -133,6 +137,22 @@ export default {
           formOptions: {
             rules: [
               { required: true, message: '请输入昵称', trigger: 'blur' }
+            ]
+          }
+        },
+        {
+          title: '用户类型',
+          prop: 'userType',
+          slot: 'slot_userType',
+          formItem: true,
+          type: 'select',
+          formOptions: {
+            options: [
+              { label: '学生', value: '1' },
+              { label: '教工', value: '2' }
+            ],
+            rules: [
+              { required: true, message: '请选择用户类型', trigger: 'change' }
             ]
           }
         },

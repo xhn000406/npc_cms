@@ -43,7 +43,7 @@ export default {
 }
 .layout{
   min-height: 100vh;
-  min-width: 1000px;
+  min-width: 1200px;
   display: flex;
   flex-flow: column;
   background-color: #f4f4f4;

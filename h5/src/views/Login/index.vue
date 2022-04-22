@@ -23,6 +23,7 @@
 import {
   setToken
 } from '@/utils/session'
+import md5 from 'md5'
 import {
   apiUserLogin
 } from '@/api/user'
@@ -35,13 +36,24 @@ export default {
       }
     }
   },
+
   methods: {
     async userLogin() {
-      const mToken = await apiUserLogin({ ...this.form })
-      if (mToken) {
+      if (this.form) {
+        const mForm = this.form
+        const mPass = this.encodePassword(mForm.password)
+        const mToken = await apiUserLogin({ ...this.form, password: mPass })
+        if (mToken) {
         setToken(mToken)
         window.location.href = '/'
       }
+      }
+    },
+
+    encodePassword(pass) {
+      const mPassword = md5(pass)
+      const mRes = md5(mPassword + mPassword.slice(mPassword.length - 5))
+      return mRes
     }
   }
 }

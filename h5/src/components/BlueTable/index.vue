@@ -426,6 +426,7 @@ export default {
       padding: 20px 10px;
     }
     tr {
+      transition: background .5s;
       &:hover {
         background-color: #f4f4f4;
       }
