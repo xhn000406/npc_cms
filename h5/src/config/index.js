@@ -1,7 +1,7 @@
 const mConfig = {
   // 全局信息
   SYSTEM_INFO: {
-    title: '大学生体质健康检测系统v1.0',
+    title: '大学生体质健康监测系统v1.0',
     baseUrl: '/api',
     uploadApi: '/file/upload'
   },

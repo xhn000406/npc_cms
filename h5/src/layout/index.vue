@@ -53,14 +53,11 @@ export default {
     z-index: 1;
   }
   main{
-    // z-index: 1;
     flex: 1;
     display: flex;
     flex-shrink: 0;
     transition: background .5s;
     aside{
-      // z-index: 1;
-      // width: 250px;
       background-color: var(--globalColor);
       box-shadow: 0 2px 4px 1px #e0e0e0;
       transition: background .2s;
@@ -83,6 +80,7 @@ export default {
         flex: 1;
         margin: 10px;
         border-radius: 10px;
+        overflow: auto;
       }
     }
   }

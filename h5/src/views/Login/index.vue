@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>大学生体质健康状况检测系统 v1.0</h1>
+    <h1>{{ title }}</h1>
     <div class="login_body">
       <el-form>
         <el-form-item label="账号：">
@@ -20,6 +20,7 @@
   </div>
 </template>
 <script>
+import config from '@/config' 
 import {
   setToken
 } from '@/utils/session'
@@ -30,6 +31,7 @@ import {
 export default {
   data() {
     return {
+      title: config.SYSTEM_INFO.title,
       form: {
         username: 'admin',
         password: 'admin'

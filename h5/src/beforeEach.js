@@ -14,7 +14,7 @@ const beforeEach = (async (to, from, next) => {
   if (to.name === 'Login') {
     next()
   } else {
-     // 如果不加这个判断，你将会进入死循环
+    // 如果不加这个判断，你将会进入死循环
     if (!mRouters) {
       try {
         const {
