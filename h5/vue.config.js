@@ -1,8 +1,10 @@
 const {
   defineConfig
 } = require('@vue/cli-service')
+
+const NODE_ENV = process.env.NODE_ENV
 const BASEURL = process.env.BASEURL
-console.log(BASEURL)
+
 const path = require('path')
 module.exports = defineConfig({
   transpileDependencies: true,
@@ -20,6 +22,11 @@ module.exports = defineConfig({
     .options({
       symbolId: "icon-[name]"
     })
+  },
+  configureWebpack: {
+    devServer: {
+      onBeforeSetupMiddleware: (({ app }) => NODE_ENV === 'development' && require('./src/mock')(app))
+    }
   },
   publicPath: './',
   devServer: {

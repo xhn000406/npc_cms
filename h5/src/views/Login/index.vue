@@ -47,7 +47,7 @@ export default {
         const mToken = await apiUserLogin({ ...this.form, password: mPass })
         if (mToken) {
         setToken(mToken)
-        window.location.href = '/'
+        window.location.href = '/pc'
       }
       }
     },
