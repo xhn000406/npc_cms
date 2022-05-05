@@ -47,10 +47,43 @@ export const asyncRoutes = [
         children: [
           {
             path: "mylisttodo",
-            name: "myListToDo",
+            name: "MyListToDo",
             component: () => import("@/views/theneighborhood/myListToDo"),
             meta: {
               title: "我的待办",
+              icon: "menu_info",
+              keepAlive: true,
+              hidden: false,
+            },
+          },
+          {
+            path: "haveFinished",
+            name: "HaveFinished",
+            component: () => import("@/views/theneighborhood/haveFinished"),
+            meta: {
+              title: "我的已办",
+              icon: "menu_info",
+              keepAlive: true,
+              hidden: false,
+            },
+          },
+          {
+            path: "record",
+            name: "Record",
+            component: () => import("@/views/theneighborhood/record"),
+            meta: {
+              title: "接访记录",
+              icon: "menu_info",
+              keepAlive: true,
+              hidden: false,
+            },
+          },
+          {
+            path: "pushRecord",
+            name: "PushRecord",
+            component: () => import("@/views/theneighborhood/pushRecord"),
+            meta: {
+              title: "发布接访计划",
               icon: "menu_info",
               keepAlive: true,
               hidden: false,

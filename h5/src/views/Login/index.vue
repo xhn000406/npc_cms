@@ -4,12 +4,21 @@
     <div class="login_body">
       <el-form>
         <el-form-item label="账号：">
-          <el-input clearable placeholder="请输入账号" v-model="form.username" />
+          <el-input
+            clearable
+            placeholder="请输入账号"
+            v-model="form.username"
+          />
         </el-form-item>
         <el-form-item label="密码：">
-          <el-input clearable placeholder="请输入密码" type="password" v-model="form.password" />
+          <el-input
+            clearable
+            placeholder="请输入密码"
+            type="password"
+            v-model="form.password"
+          />
         </el-form-item>
-        <el-form-item style="text-align: right;">
+        <el-form-item style="text-align: right">
           <router-link to="#">注册</router-link>
         </el-form-item>
         <el-form-item>
@@ -20,49 +29,46 @@
   </div>
 </template>
 <script>
-import config from '@/config' 
-import {
-  setToken
-} from '@/utils/session'
-import md5 from 'md5'
-import {
-  apiUserLogin
-} from '@/api/user'
+import config from "@/config";
+import { setToken } from "@/utils/session";
+import md5 from "md5";
+import { apiUserLogin } from "@/api/user";
 export default {
   data() {
     return {
       title: config.SYSTEM_INFO.title,
       form: {
-        username: 'admin',
-        password: 'admin'
-      }
-    }
+        username: "admin",
+        password: "admin",
+      },
+    };
   },
 
   methods: {
     async userLogin() {
       if (this.form) {
-        const mForm = this.form
-        const mPass = this.encodePassword(mForm.password)
-        const mToken = await apiUserLogin({ ...this.form, password: mPass })
+        const mForm = this.form;
+        const mPass = this.encodePassword(mForm.password);
+        const mToken = await apiUserLogin({ ...this.form, password: mPass });
         if (mToken) {
-        setToken(mToken)
-        window.location.href = '/pc'
-      }
+          setToken(mToken);
+
+          this.$router.push("/");
+        }
       }
     },
 
     encodePassword(pass) {
-      const mPassword = md5(pass)
-      const mRes = md5(mPassword + mPassword.slice(mPassword.length - 5))
-      return mRes
-    }
-  }
-}
+      const mPassword = md5(pass);
+      const mRes = md5(mPassword + mPassword.slice(mPassword.length - 5));
+      return mRes;
+    },
+  },
+};
 </script>
 <style lang="less" scoped>
 .container {
-  h1{
+  h1 {
     margin: 20px 0;
     color: #fff;
   }
