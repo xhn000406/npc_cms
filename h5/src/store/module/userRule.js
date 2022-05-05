@@ -1,24 +1,23 @@
 export default {
   state: {
     userRule: [],
-    userInfo: {}
+    userInfo: {},
   },
   getters: {
     getUserRule(state) {
-      return state.userRule
+      return state.userRule;
     },
     getUserInfo(state) {
-      return state.userInfo
-    }
+      return state.userInfo;
+    },
   },
   mutations: {
     setUserRule(state, menu) {
-      state.userRule = menu
+      state.userRule = menu;
     },
     setUserInfo(state, userInfo) {
-      state.userInfo = userInfo
-    }
+      state.userInfo = userInfo;
+    },
   },
-  actions: {
-  }
-}
+  actions: {},
+};
