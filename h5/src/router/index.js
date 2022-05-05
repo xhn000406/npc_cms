@@ -1,74 +1,96 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import NProgress from 'nprogress'
-import 'nprogress/nprogress.css'
-import power from '@/beforeEach'
-Vue.use(VueRouter)
+import Vue from "vue";
+import VueRouter from "vue-router";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
+import power from "@/beforeEach";
+Vue.use(VueRouter);
 
 // 动态路由
 export const asyncRoutes = [
   {
-    path: '/',
-    name: 'Layout',
-    redirect: { name: 'Home' },
-    component: () => import('@/layout'),
+    path: "/",
+    name: "Layout",
+    redirect: { name: "Home" },
+    component: () => import("@/layout"),
     children: [
       {
-        path: 'home',
-        name: 'Home',
-        component: () => import('@/views/home'),
+        path: "home",
+        name: "Home",
+        component: () => import("@/views/home"),
         meta: {
-          title: '首页',
-          icon: 'menu_home',
-          keepAlive: true
-        }
+          title: "首页",
+          icon: "menu_home",
+          keepAlive: true,
+        },
       },
       {
-        path: 'info',
-        name: 'Info',
-        component: () => import('@/views/info'),
+        path: "info",
+        name: "Info",
+        component: () => import("@/views/info"),
         meta: {
-          title: '个人信息',
-          icon: 'menu_info',
+          title: "个人信息",
+          icon: "menu_info",
           keepAlive: true,
-          hidden: true
-        }
-      }
-    ]
-  }
-]
+          hidden: false,
+        },
+      },
+      {
+        path: "theneighborhood",
+        name: "theNeighborhood",
+        component: () => import("@/views/theneighborhood"),
+        meta: {
+          title: "群众街坊",
+          icon: "menu_info",
+          keepAlive: true,
+          hidden: false,
+        },
+        children: [
+          {
+            path: "mylisttodo",
+            name: "myListToDo",
+            component: () => import("@/views/theneighborhood/myListToDo"),
+            meta: {
+              title: "我的待办",
+              icon: "menu_info",
+              keepAlive: true,
+              hidden: false,
+            },
+          },
+        ],
+      },
+    ],
+  },
+];
 
 // 固定路由
 export const generalRoutes = [
   {
-    path: '/login',
-    name: 'Login',
-    component: () => import('@/views/Login')
+    path: "/login",
+    name: "Login",
+    component: () => import("@/views/Login"),
   },
-  { path: '*', name: '404', component: () => import('@/views/404') }
-]
+  { path: "*", name: "404", component: () => import("@/views/404") },
+];
 
 const router = new VueRouter({
-  mode: 'hash',
+  mode: "hash",
   base: process.env.BASE_URL,
-  routes: generalRoutes
-})
+  routes: generalRoutes,
+});
 
 // 导航守卫
 router.beforeEach((to, from, next) => {
-  NProgress.start()
-  power(to, from, next)
-})
+  NProgress.start();
+  power(to, from, next);
+});
 router.afterEach(() => {
-  NProgress.done()
-})
+  NProgress.done();
+});
 
 // hook这个router的push函数
-const mRouterPush = VueRouter.prototype.push
-VueRouter.prototype.push = function(location) {
-  return mRouterPush
-  .call(this, location)
-  .catch(err => err)
-}
+const mRouterPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function (location) {
+  return mRouterPush.call(this, location).catch((err) => err);
+};
 
-export default router
+export default router;
